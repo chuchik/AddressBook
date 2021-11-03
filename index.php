@@ -1,25 +1,16 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
 
-$provinces = include "data/provinces.php";
-$cities = include "data/cities.php";
-$addresses = include "data/addresses.php";
-$persons = include "data/persons.php";
+include "lib/AddressBook.php";
 
-include "classes/classess.php";
-$addresses = new addresses();
-$persons = new persons();
-$addresses->getAddress();
-$persons->getPersons();
+$currentPath = __DIR__;
+$pathToData = "{$currentPath}/data";
+$pathToClasses = "{$currentPath}/lib";
 
-//include "functions/global.php";
-//echo "<pre>";
-//echo sizeof($persons), "<br>";
+echo "I'm : {$currentPath}<br>";
+echo "I'm : {$pathToData}<br>";
+echo "I'm : {$pathToClasses}<br>";
 
-
-//getRegions($provinces);
-//getCities($provinces, $cities);
-//getAddresses($cities, $addresses);
-//getPersons($addresses, $persons);
-//$chuch = getPersonsByName($persons, $addresses, $cities, "pet");
-//print_r($chuch);
-//echo "Awesome project";
+$ab = new AddressBook($pathToData);
