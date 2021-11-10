@@ -6,9 +6,14 @@ include "Province.php";
 
 class AddressBook
 {
+    const OWNER_NAME = "CHUCHIK_PAPA";
+    /** @var Province[] */
     protected $provinces = [];
+    /** @var City[] */
     protected $cities = [];
+    /** @var Address[] */
     protected $addresses = [];
+    /** @var Person[] */
     protected $persons = [];
 
     public function __construct(string $pathToData){
@@ -27,8 +32,25 @@ class AddressBook
             $this->cities[$city['id']] = new City($city);
         }
         $provinces = include "{$pathToData}/provinces.php";
-        foreach ($provinces as $province) {
-            $this->provinces[$province['id']] = new Province($province);
+        foreach ($provinces as $id => $province) {
+            $this->provinces[$id] = new Province($province, $id);
+        }
+    }
+
+    public function findPerson(int $id) :?Person {
+        foreach ($this->persons as $person){
+            if ($person->getId() === $id){
+                return $person;
+            }
+        }
+        return null;
+    }
+
+    public function showBigCities(){
+        foreach ($this->cities as $city) {
+            if($city->isBigCity()){
+                print_r($city);
+            }
         }
     }
 }

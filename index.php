@@ -9,8 +9,10 @@ $currentPath = __DIR__;
 $pathToData = "{$currentPath}/data";
 $pathToClasses = "{$currentPath}/lib";
 
+echo "<pre>";
 echo "I'm : {$currentPath}<br>";
 echo "I'm : {$pathToData}<br>";
 echo "I'm : {$pathToClasses}<br>";
 
 $ab = new AddressBook($pathToData);
+$ab->showBigCities();

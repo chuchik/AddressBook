@@ -5,11 +5,9 @@ class Province
     protected $name = "";
     protected $id = 0;
 
-    public function __construct(array $params) {
-        if(!empty($params)){
-            $this->name = $params['name'];
-            $this->id = $params['id'];
-        }
+    public function __construct(string $name, int $id) {
+        $this->name = $name;
+        $this->id = $id;
     }
 
     public function getName()
