@@ -17,7 +17,6 @@ class AddressBook
     protected $persons = [];
 
     public function __construct(string $pathToData){
-        echo "<pre>";
         $addresses = include "{$pathToData}/addresses.php";
         foreach ($addresses as $address) {
             $this->addresses[$address['id']] = new Address($address);
@@ -37,10 +36,16 @@ class AddressBook
         }
     }
 
-    public function findPerson(int $id) :?Person {
+    /**
+     * @param int $city_id
+     * @return Person[]|null
+     */
+    public function findAllPersonsByCityId(int $city_id) :?array{
+        $persons_by_city = [];
         foreach ($this->persons as $person){
-            if ($person->getId() === $id){
-                return $person;
+            if($person->getCityId() === $city_id){
+                $persons_by_city[] = $person;
+                return $persons_by_city;
             }
         }
         return null;
@@ -53,4 +58,33 @@ class AddressBook
             }
         }
     }
+
+    public function findAddressWithId(int $id) :?Address{
+        foreach ($this->addresses as $address){
+            if ($address->getId() === $id){
+                return $address;
+            }
+        }
+        return null;
+    }
+
+    public function findAddressWithName(string $name) :?Address{
+        foreach ($this->addresses as $address){
+            print_r(strpos($address->getName(),$name ));
+            if (strpos($address->getName(),$name ) !== false){
+                return $address;
+            }
+        }
+        return null;
+    }
+
+    public function findAddressWithCityId(int $city_id) :?Address{
+        foreach ($this->addresses as $address){
+            if ($address->getCityId() === $city_id){
+                return $address;
+            }
+        }
+        return null;
+    }
+
 }
