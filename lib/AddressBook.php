@@ -87,4 +87,15 @@ class AddressBook
         return null;
     }
 
+    public function getCities() :array {
+        foreach ($this->cities as $city) {
+            $city->province = $this->getProvinceById($city->getCityId());
+        }
+        return $this->cities;
+    }
+
+    public function getProvinceById(int $id) :Province {
+        return $this->provinces[$id];
+    }
+
 }

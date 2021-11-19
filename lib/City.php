@@ -10,6 +10,8 @@ class City
     protected $provinceId = 0;
     protected $population = 0;
 
+    public $province = null;
+
     public function __construct(array $params)
     {
         if (!empty($params)) {
@@ -73,5 +75,9 @@ class City
             return true;
         }
         return false;
+    }
+
+    public function getPopulation() :int {
+        return $this->population;
     }
 }
