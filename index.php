@@ -17,3 +17,4 @@ $ab = new AddressBook($pathToData);
 $ab->findAllPersonsByCityId(2);
 print_r($ab->findAddressWithName("Ararat"));
 
+echo "Another awesome string<br>";
