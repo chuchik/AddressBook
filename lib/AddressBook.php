@@ -93,9 +93,87 @@ class AddressBook
         }
         return $this->cities;
     }
+    public function getPersons() :array{
+        foreach ($this->persons as $person){
+            $person->address = $this->getProvinceById($person->getId());
+        }
+        return  $this->persons;
+    }
+    public function getAddresses() :array{
+        foreach ($this->addresses as $address){
+            $address->city = $this->getProvinceById($address->getId());
+        }
+        return $this->addresses;
+    }
+    public function getProvinces() :array{
+        return $this->provinces;
+    }
+    public function getCityWithName(string $name) :?City{
+        foreach ($this-> cities as $city){
+            if (strpos($city->getName(), $name) !=false){
+                return $city;
+            }
 
+        }
+        return null;
+    }
+    public function getPersonWithProvinceId(int $province_id) :?Person{
+        foreach ($this->persons as $person){
+            if($person->getProvinceId() === $province_id  ){
+                return $person;
+            }
+        }
+        return null;
+    }
+    public function getPersonWithCityId(int $city_id) :?Person{
+        foreach ($this->persons as $person){
+            if ($person->getCityId() === $city_id){
+                return $person;
+            }
+        }
+        return null;
+    }
+    public function getPersonWithName(string $name) :?Person{{
+        foreach ($this->persons as $person){
+            if (strpos($person->getName(), $name) !=false){
+                return $person;
+            }
+        }
+        return null;
+    }
+    }
+    public function getPersonWithAddressId(int $address_id) :?Person{
+        foreach ($this->persons as $person){
+            if ($person->getAddressId() === $address_id){
+                return $person;
+            }
+        }
+        return null;
+    }
+    public function getProvinceWithId(int $id) :?Province{
+        foreach ($this->provinces as $province){
+            if ($province->getId() === $id){
+                return $province;
+            }
+        }
+        return null;
+    }
+    public function getProvinceWithName(string $name) :?Province{
+        foreach ($this->provinces as $province){
+            if (strpos($province->getName(), $name) !=false){
+                return $province;
+            }
+        }
+        return null;
+    }
     public function getProvinceById(int $id) :Province {
         return $this->provinces[$id];
     }
+//    public function getCityById(int $city_id) :City{
+//        return $this->cities[$city_id];
+//    }
+//    public function getAddressById(int $address_id) :Address{
+//        return $this->addresses[$address_id];
+//    }
 
 }
