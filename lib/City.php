@@ -57,7 +57,7 @@ class City
     /**
      * @return int|mixed
      */
-    public function getCityId()
+    public function getProvinceId()
     {
         return $this->provinceId;
     }
@@ -65,7 +65,7 @@ class City
     /**
      * @param int|mixed $cityId
      */
-    public function setCityId($cityId): void
+    public function setProvinceId($cityId): void
     {
         $this->provinceId = $cityId;
     }

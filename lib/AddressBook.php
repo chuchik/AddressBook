@@ -89,19 +89,21 @@ class AddressBook
 
     public function getCities() :array {
         foreach ($this->cities as $city) {
-            $city->province = $this->getProvinceById($city->getCityId());
+            $city->province = $this->getProvinceById($city->getProvinceId());
         }
         return $this->cities;
     }
     public function getPersons() :array{
         foreach ($this->persons as $person){
-            $person->address = $this->getProvinceById($person->getId());
+            $person->city = $this->getCityById($person->getCityId());
+            $person->province = $this->getProvinceById($person->getProvinceId());
+            $person->address = $this->getAddressById($person->getAddressId());
         }
         return  $this->persons;
     }
     public function getAddresses() :array{
         foreach ($this->addresses as $address){
-            $address->city = $this->getProvinceById($address->getId());
+            $address->city = $this->getCityById($address->getCityId());
         }
         return $this->addresses;
     }
@@ -133,14 +135,13 @@ class AddressBook
         }
         return null;
     }
-    public function getPersonWithName(string $name) :?Person{{
+    public function getPersonWithName(string $name) :?Person{
         foreach ($this->persons as $person){
-            if (strpos($person->getName(), $name) !=false){
+            if (strpos(strtolower($person->getName()), strtolower($name)) !== false){
                 return $person;
             }
         }
         return null;
-    }
     }
     public function getPersonWithAddressId(int $address_id) :?Person{
         foreach ($this->persons as $person){
@@ -169,11 +170,11 @@ class AddressBook
     public function getProvinceById(int $id) :Province {
         return $this->provinces[$id];
     }
-//    public function getCityById(int $city_id) :City{
-//        return $this->cities[$city_id];
-//    }
-//    public function getAddressById(int $address_id) :Address{
-//        return $this->addresses[$address_id];
-//    }
+    public function getCityById(int $city_id) :City{
+        return $this->cities[$city_id];
+    }
+    public function getAddressById(int $address_id) :Address{
+        return $this->addresses[$address_id];
+    }
 
 }
